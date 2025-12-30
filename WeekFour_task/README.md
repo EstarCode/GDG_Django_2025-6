@@ -132,10 +132,8 @@ The application handles common errors gracefully:
 
 ```
 .
-├── tempCodeRunnerFile.py    # Main application
+├── todo_App.py    # Main application
 ├── todos.json              # Data storage (auto-created)
-├── test_todo_app.py        # Comprehensive test suite
-├── manual_test.py          # Manual testing script
 └── README.md              # This file
 ```
 
@@ -160,4 +158,5 @@ Potential improvements:
 - Search functionality
 - Export to different formats
 - Web interface
+
 - Multiple todo lists
