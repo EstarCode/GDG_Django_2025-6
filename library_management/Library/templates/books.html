@@ -1,0 +1,19 @@
+<h1>Library Books</h1>
+
+{% for book in books %}
+<div style="margin-bottom:20px; border-bottom:1px solid gray;">
+    <h2>{{ book.title }}</h2>
+
+    <p><strong>Author:</strong> {{ book.author }}</p>
+
+    <p><strong>Categories:</strong>
+        {% for category in book.categories.all %}
+        {{ category.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+        No categories
+        {% endfor %}
+    </p>
+
+    <p><strong>Available Copies:</strong> {{ book.available_copies }}</p>
+</div>
+{% endfor %}
