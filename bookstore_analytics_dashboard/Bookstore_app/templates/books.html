@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+
+<h1>{{ title }}</h1>
+
+<!-- ================= BOOKS SECTION ================= -->
+{% if books %}
+    <h2>Books</h2>
+    <ul>
+    {% for book in books %}
+        <li>
+            <b>{{ book.title }}</b>
+            | Year: {{ book.published_year }}
+            | Price: ${{ book.price }}
+
+            {% if book.author %}
+                | Author: {{ book.author.name }}
+            {% endif %}
+
+            {% if book.isbn %}
+                | ISBN: {{ book.isbn }}
+            {% endif %}
+        </li>
+    {% empty %}
+        <li>No books found</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+<!-- ================= AUTHORS SECTION ================= -->
+{% if authors %}
+    <h2>Authors</h2>
+
+    {% for author in authors %}
+        <div style="margin-bottom:20px;">
+            <h3>
+                {{ author.name }} ({{ author.country }})
+
+                {% if author.total_revenue %}
+                    | Revenue: ${{ author.total_revenue }}
+                {% endif %}
+            </h3>
+
+            <ul>
+            {% for book in author.books.all %}
+                <li>{{ book.title }} - ${{ book.price }}</li>
+            {% empty %}
+                <li>No books</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>
