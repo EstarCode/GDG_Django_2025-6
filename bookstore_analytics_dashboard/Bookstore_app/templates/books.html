@@ -1,61 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ title }}</title>
-</head>
-<body>
-
 <h1>{{ title }}</h1>
 
-<!-- ================= BOOKS SECTION ================= -->
 {% if books %}
-    <h2>Books</h2>
-    <ul>
+<h2>Books</h2>
+<ul>
     {% for book in books %}
-        <li>
-            <b>{{ book.title }}</b>
-            | Year: {{ book.published_year }}
-            | Price: ${{ book.price }}
-
-            {% if book.author %}
-                | Author: {{ book.author.name }}
-            {% endif %}
-
-            {% if book.isbn %}
-                | ISBN: {{ book.isbn }}
-            {% endif %}
-        </li>
-    {% empty %}
-        <li>No books found</li>
+    <li>
+        {{ book.title }} |
+        {{ book.published_year }} |
+        {{ book.price }} $
+        {% if book.author %}
+        | Author: {{ book.author.name }}
+        {% endif %}
+    </li>
     {% endfor %}
-    </ul>
+</ul>
 {% endif %}
 
 
-<!-- ================= AUTHORS SECTION ================= -->
 {% if authors %}
-    <h2>Authors</h2>
-
+<h2>Authors</h2>
+<ul>
     {% for author in authors %}
-        <div style="margin-bottom:20px;">
-            <h3>
-                {{ author.name }} ({{ author.country }})
+    <li>
+        <b>{{ author.name }}</b> ({{ author.country }})
 
-                {% if author.total_revenue %}
-                    | Revenue: ${{ author.total_revenue }}
-                {% endif %}
-            </h3>
-
-            <ul>
+        <ul>
             {% for book in author.books.all %}
-                <li>{{ book.title }} - ${{ book.price }}</li>
+            <li>{{ book.title }}</li>
             {% empty %}
-                <li>No books</li>
+            <li>No books</li>
             {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
-{% endif %}
+        </ul>
 
-</body>
-</html>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% for author in authors %}
+<h3>
+    {{ author.name }} — Revenue: ${{ author.total_revenue }}
+</h3>
+
+<ul>
+    {% for book in author.books.all %}
+    <li>{{ book.title }} - ${{ book.price }}</li>
+    {% endfor %}
+</ul>
+{% endfor %}
