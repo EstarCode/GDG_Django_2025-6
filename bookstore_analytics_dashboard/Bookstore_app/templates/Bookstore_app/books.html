@@ -1,0 +1,74 @@
+{% extends "Bookstore_app/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">{{ title }}</h2>
+
+{% if books %}
+<!-- BOOK TABLE -->
+<table class="table table-bordered table-striped text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author.name }}</td>
+            <td>{{ book.published_year }}</td>
+            <td>${{ book.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% elif authors %}
+<!-- AUTHOR TABLE -->
+<table class="table table-bordered table-striped text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Total Revenue</th>
+            <th>Books</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for author in authors %}
+        <tr>
+            <td>{{ author.name }}</td>
+            <td>{{ author.country }}</td>
+
+            <td>
+                {% if author.total_revenue %}
+                ${{ author.total_revenue }}
+                {% else %}
+                -
+                {% endif %}
+            </td>
+
+            <td>
+                {% for book in author.books.all %}
+                <span class="badge bg-primary">{{ book.title }}</span>
+                {% empty %}
+                No books
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<div class="alert alert-warning text-center">
+    No data available
+</div>
+{% endif %}
+
+{% endblock %}

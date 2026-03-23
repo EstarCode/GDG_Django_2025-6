@@ -1,0 +1,22 @@
+{% extends "Bookstore_app/base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">{{ title }}</h2>
+
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-4">
+        <div class="card mb-3 shadow">
+            <div class="card-body">
+                <h5>{{ book.title }}</h5>
+                <p>Author: {{ book.author.name }}</p>
+                <p>Price: ${{ book.price }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No Python books found</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

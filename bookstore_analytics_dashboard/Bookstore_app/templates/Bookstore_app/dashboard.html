@@ -1,0 +1,24 @@
+{% extends "Bookstore_app/base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">{{ title }}</h2>
+
+<table class="table table-striped text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Author</th>
+            <th>Total Revenue</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for author in authors %}
+        <tr>
+            <td>{{ author.name }}</td>
+            <td>${{ author.total_revenue }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

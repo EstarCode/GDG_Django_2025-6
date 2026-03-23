@@ -1,0 +1,17 @@
+{% extends "Bookstore_app/base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">{{ title }}</h2>
+
+<ul class="list-group">
+    {% for author in authors %}
+    <li class="list-group-item d-flex justify-content-between">
+        <span>{{ author.name }}</span>
+        <span class="badge bg-primary">{{ author.country }}</span>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No authors found</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

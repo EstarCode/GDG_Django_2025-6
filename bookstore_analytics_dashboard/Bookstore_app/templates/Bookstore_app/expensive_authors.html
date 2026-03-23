@@ -1,0 +1,21 @@
+{% extends "Bookstore_app/base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">{{ title }}</h2>
+
+{% for author in authors %}
+<div class="card mb-3 shadow">
+    <div class="card-body">
+        <h5>{{ author.name }}</h5>
+
+        <h6>Books:</h6>
+        {% for book in author.books.all %}
+        <span class="badge bg-danger">{{ book.title }} (${{ book.price }})</span>
+        {% empty %}
+        <p>No books</p>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
